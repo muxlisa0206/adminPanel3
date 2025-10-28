@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
+</head>
+<body>
+    <header class="fixed z-1 w-full top-0">
+        <div class="container mx-auto px-[20px] flex items-center gap-5 py-[10px]">
+            <input id="search" class="w-full max-w-[50%] border-[gray]/700 p-[10px] border-1 outline-none rounded-[4px_0_0_4px]" type="text" placeholder="F.I.SH">
+            <select class="p-[10px] max-w-[250px] w-full">
+                <option value="Lavozim turini tanlang">Lavozim turini tanlang</option>
+                <option value="Junior">Junior</option>
+                <option value="Middle">Middle</option>
+                <option value="Senior">Senior</option>
+            </select>
+            <select class="p-[10px] max-w-[250px] w-full">
+                <option value="Manzilni tanlang">Manzilni tanlang</option>
+                <option value="Toshkent">Toshkent</option>
+                <option value="Samarqand">Samarqand</option>
+                <option value="Buxoro">Buxoro</option>
+                <option value="Nukus">Nukus</option>
+            </select>
+            <button id="add" class="bg-green-700 p-[10px] max-w-[200px] w-full flex items-center justify-center text-white font-medium rounded-[0_4px_4px_0]">Qo'shish</button>
+        </div>
+    </header>
+    
+    <main class="py-[10px] mt-[60px]">
+        <section>
+            <div class="container mx-auto px-[20px]">
+                <div class="relative overflow-x-auto sm:rounded-lg">
+                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                        <thead class="text-xs text-white uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">
+                                    No
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Ism
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Familiya
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Manzil
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Tug'ilgan kun
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Lavozim
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Lavozim turi
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Maoshi
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Uylanganmi
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Faoliyati
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody">
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <div id="outer-modal" class="hidden fixed z-20 inset-0 flex bg-black/35 items-center justify-center">>
+                <div id="inner-modal" class="bg-white rounded-lg shadow-lg w-full max-w-lg">
+                
+                    <div class="flex justify-between items-center px-5 py-3">
+                        <h2 class="text-lg font-semibold">O'quvchining ma'lumotlari</h2>
+                        <button type="button" class="text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+                    </div>
+
+                    <!-- Forma -->
+                    <form id="form" class="p-5 space-y-4">
+                        <div>
+                            <label for="ism" class="block text-sm font-medium text-gray-700 mb-1">Ismini kiriting:</label>
+                            <input id="ism" name="ism" type="text" placeholder="Ism"
+                                class="w-full border border-gray-300 rounded-md p-2 focus:ring focus:ring-blue-200 focus:border-blue-400 outline-none" required />
+                        </div>
+
+                        <div>
+                            <label for="familiya" class="block text-sm font-medium text-gray-700 mb-1">Familiyangizni kiriting:</label>
+                            <input id="familiya" name="familiya" type="text" placeholder="Familiya"
+                                class="w-full border border-gray-300 rounded-md p-2 focus:ring focus:ring-blue-200 focus:border-blue-400 outline-none" required />
+                        </div>
+
+                        <div>
+                            <label for="manzil" class="block text-sm font-medium text-gray-700 mb-1">Manzilni tanlang:</label>
+                            <select id="manzil" name="manzil"
+                                class="w-full border border-gray-300 rounded-md p-2 focus:ring focus:ring-blue-200 focus:border-blue-400 outline-none">
+                                <option>Bukhara</option>
+                                <option>Tashkent</option>
+                                <option>Farg'ona</option>
+                                <option>Namangan</option>
+                            </select>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label for="tugilgan" class="block text-sm font-medium text-gray-700 mb-1">Tug'ilgan kuni:</label>
+                                <input id="tugilgan" name="tugilgan" type="date"
+                                class="w-full border border-gray-300 rounded-md p-2 focus:ring focus:ring-blue-200 focus:border-blue-400 outline-none" />
+                            </div>
+                            <div>
+                                <label for="lavozim" class="block text-sm font-medium text-gray-700 mb-1">Lavozim:</label>
+                                <select id="lavozim" name="lavozim"
+                                class="w-full border border-gray-300 rounded-md p-2 focus:ring focus:ring-blue-200 focus:border-blue-400 outline-none">
+                                <option>React</option>
+                                <option>Vue</option>
+                                <option>Angular</option>
+                                <option>Node.js</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label for="lavozim_turi" class="block text-sm font-medium text-gray-700 mb-1">Lavozim turi:</label>
+                                <select id="lavozim_turi" name="lavozim_turi"
+                                class="w-full border border-gray-300 rounded-md p-2 focus:ring focus:ring-blue-200 focus:border-blue-400 outline-none">
+                                <option>junior</option>
+                                <option>middle</option>
+                                <option>senior</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="maosh" class="block text-sm font-medium text-gray-700 mb-1">Maoshi:</label>
+                                <input id="maosh" name="maosh" type="number" placeholder="Maosh"
+                                class="w-full border border-gray-300 rounded-md p-2 focus:ring focus:ring-blue-200 focus:border-blue-400 outline-none" />
+                            </div>
+                        </div>
+
+                        <div class="flex items-center space-x-2">
+                            <input id="uylangan" name="uylangan" type="checkbox"
+                                class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500" />
+                            <label for="uylangan" class="text-sm text-gray-700">Uylanganmi?</label>
+                        </div>
+                        <div class="border-t px-5 py-3 flex justify-end space-x-3">
+                            <button type="button" class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded-md">Yopish</button>
+                            <button type="submit" form="form" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md">Qo'shish</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+    </main>
+    <script src="/js/main.js"></script>
+</body>
+</html>
